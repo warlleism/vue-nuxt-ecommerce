@@ -21,7 +21,7 @@ export const useProducts = () => {
         }
     }
 
-    const setPage = (newPage) => {
+    const setPage = (newPage: number) => {
         page.value = newPage
     }
 
