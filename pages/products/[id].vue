@@ -1,12 +1,13 @@
 <template>
-    <div>
-        <h1>Detalhes do Produto</h1>
-        <div v-if="product">
-            <img :src="product.img" alt="Product Image" class="w-full h-[100px] object-contain">
-            <h2>{{ product.title }}</h2>
-            <p>{{ product.description }}</p>
-            <p>Preço: {{ product.price }}</p>
-        </div>
+    <div v-if="product">
+        <img :src="product.img" alt="Product Image" class="w-[100px] h-[100px] object-contain">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description }}</p>
+        <p>R$ {{ product.price ? product.price.toString().replace('.', ',') : '' }}</p>
+    </div>
+
+    <div v-else class="flex justify-center items-center h-[100vh] w-full">
+        <Icon name="eos-icons:loading" size="148" class="text-orange-500 animate-spin" />
     </div>
 </template>
 
