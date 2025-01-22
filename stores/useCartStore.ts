@@ -1,8 +1,15 @@
 import { defineStore } from 'pinia'
 
 interface CartItem {
-    id: string
-    price: number
+    id: string | number;
+    title: string;
+    description: string;
+    enterprise: string;
+    img: string;
+    category: string;
+    price: number;
+    discont_price: number;
+    discount: number;
     quantity: number
 }
 

@@ -20,11 +20,14 @@
                     <h3 class="font-medium">{{ item.title }}</h3>
                     <p class="text-gray-600">R$ {{ item.price.toString().replace('.', ',') }}</p>
                     <div class="flex items-center gap-2 mt-2">
-                        <button @click="cart.decrementItem(item.quantity)" class="text-orange-500">
+                        <button 
+                         :disabled="item.quantity === 0"
+                        @click="cart.updateQuantity(item.id, item.quantity - 1)" class="text-orange-500">
                             <Icon name="mdi:minus" size="20" />
                         </button>
                         <span>{{ item.quantity }}</span>
-                        <button @click="cart.incrementItem(item.quantity)" class="text-orange-500">
+                        <button 
+                        @click="cart.updateQuantity(item.id, item.quantity + 1)" class="text-orange-500">
                             <Icon name="mdi:plus" size="20" />
                         </button>
                         <button @click="cart.removeItem(item.id)" class="text-red-500 ml-auto">
@@ -37,7 +40,7 @@
             <div class="mt-4 border-t pt-4">
                 <div class="flex justify-between font-bold">
                     <span>Total:</span>
-                    <span>R$ {{ cart.total.toString().replace('.', ',') }}</span>
+                    <span>R$ {{ cart.total.toFixed(2).toString().replace('.', ',') }}</span>
                 </div>
                 <button
                     class="w-full bg-orange-500 text-white py-2 rounded-md mt-4 hover:bg-orange-600 transition-colors">
