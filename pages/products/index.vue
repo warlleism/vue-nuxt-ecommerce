@@ -40,21 +40,19 @@
 import { onMounted } from 'vue'
 import { useProducts } from '~/hooks/useGetProducts'
 import { useCartStore } from '../../stores/useCartStore.ts'
-import { toast } from 'vue-sonner'
+import { useToast } from '~/components/toast/useToast'
 
 const cart = useCartStore()
 const { products, fetchProducts, totalPages, setPage, loading } = useProducts()
 
 const addToCart = (product) => {
-    toast(`${product.title} adicionado ao carrinho!`, {
-        position: 'top-left',
-        style: {
-            fontWeight: 'normal',
-            fontSize: '16px',
-            color: 'orange',
-        }
-    })
-    cart.addItem(product)
+    const productExists = cart.items.find((item) => item.title === product.title)
+    if (!productExists) {
+        cart.addItem(product)
+        useToast().showToast(`${product.title} adicionado ao carrinho!`)
+    } else {
+        useToast().showToast(`produto já está no carrinho!`)
+    }
 }
 
 onMounted(() => {

@@ -16,7 +16,7 @@
             ">
                 <Icon name="mdi:cart" size="24" />
             </button>
-            <cart :isOpen="isOpen" :handleShowCart="handleShowCart" />
+            <cart :isOpen="isOpen" :handleShowCart="handleShowCart" :cart="cartStore" />
         </header>
     </div>
 </template>
@@ -25,7 +25,9 @@
 
 import cart from '../cart/index.vue'
 import { ref } from 'vue'
+import { useCartStore } from '~/stores/useCartStore'
 
+const cartStore = useCartStore()
 const isOpen = ref(false)
 
 const handleShowCart = () => {

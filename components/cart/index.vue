@@ -38,9 +38,7 @@
                 <span>Total:</span>
                 <span>R$ {{ cart.total.toFixed(2).toString().replace('.', ',') }}</span>
             </div>
-            <button 
-            :disabled="checkOut"
-            @click="handleCheckOut"
+            <button :disabled="checkOut" @click="handleCheckOut"
                 class="w-full bg-orange-500 text-white py-2 rounded-md mt-4 hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                 {{ !checkOut ? 'Finalizar Compra' : 'Finalizando...' }}
             </button>
@@ -49,9 +47,7 @@
 </template>
 
 <script setup>
-import { useCartStore } from '~/stores/useCartStore'
 
-const cart = useCartStore()
 const checkOut = ref(false)
 
 const handleCheckOut = () => {
@@ -68,6 +64,10 @@ const props = defineProps({
     },
     handleShowCart: {
         type: Function,
+        required: true
+    },
+    cart: {
+        type: Object,
         required: true
     }
 })
