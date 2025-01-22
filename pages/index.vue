@@ -1,9 +1,8 @@
 <template>
-    <div>Página Inicial</div>
-    <NuxtLink :to="`/products`">Ver Produtos</NuxtLink>
-
+    <Products />
 </template>
 
 <script setup>
+import Products from './products/index.vue'
 
 </script>

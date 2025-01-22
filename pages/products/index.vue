@@ -1,24 +1,26 @@
 <template>
 
-    <div class="w-full flex flex-col justify-center items-center">
+    <div class="w-full flex flex-col justify-center items-center p-5">
         <ul v-if="products.length && !loading"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5 w-[70%]">
             <li v-for="product in products" :key="product.id"
-                class="flex flex-col w-full items-center h-[200px] bg-[#0a0a0a0f] rounded-md shadow-md">
-                <img :src="product.img" alt="Product Image" class="w-[100px] h-[100px] object-contain">
+                class="flex flex-col w-full justify-center items-center h-[200px] bg-[#0a0a0a0f] rounded-md shadow-md">
+                <img :src="product.img" alt="Product Image" class="w-[100px] h-[70px] object-contain">
                 <div>{{ product.title }}</div>
                 <div>R$ {{ product?.price.replace('.', ',') }}</div>
-                <Button>
-                    <NuxtLink :to="`/products/${product.id}`" class=" w-full h-full flex items-center justify-center ">
-                        <div class=" flex items-center justify-center bg-orange-500 h-full w-[40px]">
-                            <Icon name="clarity:shopping-cart-solid" style="color: #fff" />
-                        </div>
-                        <div
-                            class="flex items-center justify-center h-full w-[80px] text-sm text-orange-500 hover:text-white font-semibold">
+                <button
+                    class="flex flex-row items-center justify-between w-[150px] h-[40px] border-[1px] border-orange-500 bg-white rounded-md overflow-hidden">
+                    <div @click="addToCart(product)"
+                        class=" flex items-center justify-center bg-orange-500 h-full w-[30%]">
+                        <Icon name="clarity:shopping-cart-solid" style="color: #fff" />
+                    </div>
+                    <NuxtLink :to="`/products/${product.id}`"
+                        class=" w-[70%] h-full flex items-center justify-center  text-sm text-orange-500 font-semibold hover:bg-[#fcb381]  transition-all duration-300">
+                        <div class="text-black hover:text-white w-full h-full flex items-center justify-center">
                             COMPRAR
                         </div>
                     </NuxtLink>
-                </Button>
+                </button>
             </li>
         </ul>
 
@@ -31,17 +33,29 @@
                 class="bg-orange-500 text-white cursor-pointer p-4 rounded-sm " @click="setPage(page)">{{ page
                 }}</button>
         </div>
-
     </div>
-
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { useProducts } from '~/hooks/useGetProducts'
-import Button from '~/components/buyButton/buyButton.vue'
+import { useCartStore } from '../../stores/useCartStore.ts'
+import { toast } from 'vue-sonner'
 
+const cart = useCartStore()
 const { products, fetchProducts, totalPages, setPage, loading } = useProducts()
+
+const addToCart = (product) => {
+    toast(`${product.title} adicionado ao carrinho!`, {
+        position: 'top-left',
+        style: {
+            fontWeight: 'normal',
+            fontSize: '16px',
+            color: 'orange',
+        }
+    })
+    cart.addItem(product)
+}
 
 onMounted(() => {
     fetchProducts()

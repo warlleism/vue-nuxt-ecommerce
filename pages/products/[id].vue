@@ -1,6 +1,6 @@
 <template>
     <div v-if="product">
-        <img :src="product.img" alt="Product Image" class="w-[100px] h-[100px] object-contain">
+        <img v-if="product.img" :src="product.img" alt="Product Image" class="w-[100px] h-[100px] object-contain">
         <h2>{{ product.title }}</h2>
         <p>{{ product.description }}</p>
         <p>R$ {{ product.price ? product.price.toString().replace('.', ',') : '' }}</p>

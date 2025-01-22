@@ -11,5 +11,5 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ['@nuxt/icon', '@pinia/nuxt']
+  modules: ['vue-sonner/nuxt', '@nuxt/icon', '@pinia/nuxt']
 })
