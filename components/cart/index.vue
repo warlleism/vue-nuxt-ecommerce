@@ -34,9 +34,9 @@
             </div>
         </div>
         <div class="absolute bottom-0 left-0 w-full p-4 h-[15%] flex flex-col items-center justify-center">
-            <div class="flex justify-between font-bold">
-                <span>Total:</span>
-                <span>R$ {{ cart.total.toFixed(2).toString().replace('.', ',') }}</span>
+            <div class="flex  justify-between font-bold w-full">
+                <span class="text-orange-500 text-xl">Total:</span>
+                <span class="text-xl">R$ {{ cart.total.toFixed(2).toString().replace('.', ',') }}</span>
             </div>
             <button :disabled="checkOut" @click="handleCheckOut"
                 class="w-full bg-orange-500 text-white py-2 rounded-md mt-4 hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">

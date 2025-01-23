@@ -17,6 +17,7 @@ export const useCartStore = defineStore('cart', {
     state: () => {
         return {
             items: [] as CartItem[],
+            showCart: false,
             total: 0
         }
     },
@@ -58,8 +59,13 @@ export const useCartStore = defineStore('cart', {
             }, 0)
         },
 
+        toggleCart() {
+            this.showCart = !this.showCart
+        },
+
         clearCart() {
             this.items = []
+            this.showCart = false
             this.total = 0
         }
     },

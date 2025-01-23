@@ -1,6 +1,10 @@
 <template>
     <div class="h-[100px]">
-        <header class="bg-[#f6f6f6] w-full flex justify-end p-5 fixed top-0 transition-transform duration-300">
+        <header class=" w-full flex justify-between items-center p-5 fixed top-0 transition-transform duration-300">
+            <NuxtLink to="/">
+                <img :src="logo" alt="Logo" class="w-[50px] h-[50px] object-contain">
+            </NuxtLink>
+
             <button @click="handleShowCart" class="
             flex 
             items-center 
@@ -8,15 +12,15 @@
             text-orange-500 
             p-3 
             rounded-full 
-            border 
-            border-orange-500 
-            hover:bg-orange-500 
-            hover:text-white
+            relative
             transition-all duration-300
             ">
-                <Icon name="mdi:cart" size="24" />
+                <Icon name="mdi:cart" size="30" />
+                <div
+                    class="absolute top-[-5px] right-[-5px] bg-orange-500 p-3 text-white rounded-full w-5 h-5 flex items-center justify-center">
+                    {{ cartStore.items.length }}</div>
             </button>
-            <cart :isOpen="isOpen" :handleShowCart="handleShowCart" :cart="cartStore" />
+            <cart :isOpen="cartStore.showCart" :handleShowCart="handleShowCart" :cart="cartStore" />
         </header>
     </div>
 </template>
@@ -24,14 +28,13 @@
 <script setup>
 
 import cart from '../cart/index.vue'
-import { ref } from 'vue'
 import { useCartStore } from '~/stores/useCartStore'
+import logo from '~/assets/logo/logo.png'
 
 const cartStore = useCartStore()
-const isOpen = ref(false)
 
 const handleShowCart = () => {
-    isOpen.value = !isOpen.value
+    cartStore.toggleCart()
 }
 
 </script>
