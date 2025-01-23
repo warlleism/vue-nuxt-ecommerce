@@ -4,7 +4,11 @@
             <NuxtLink to="/">
                 <img :src="logo" alt="Logo" class="w-[50px] h-[50px] object-contain">
             </NuxtLink>
-
+            <div class="flex-1 max-w-md mx-8">
+                <div class="relative">
+                    <Search />
+                </div>
+            </div>
             <button @click="handleShowCart" class="
             flex 
             items-center 
@@ -26,15 +30,16 @@
 </template>
 
 <script setup>
-
 import cart from '../cart/index.vue'
 import { useCartStore } from '~/stores/useCartStore'
 import logo from '~/assets/logo/logo.png'
+import Search from '../search/search.vue'
 
 const cartStore = useCartStore()
 
 const handleShowCart = () => {
     cartStore.toggleCart()
 }
+
 
 </script>
