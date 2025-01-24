@@ -2,10 +2,10 @@
     <div id="search" class="flex items-center justify-between h-10 overflow-hidden rounded-md border border-gray-300 ">
         <input @input="handleSearch($event)" type="text" placeholder="Buscar produtos..."
             class="w-full h-full outline-none pl-2">
-        <button
+        <NuxtLink @click="searchResults = []" :to="`/detailAll/${searchText}`"
             class=" h-full w-[40px] border-l-2 border-gray-300 text-gray-400 hover:text-orange-500  flex items-center justify-center">
             <Icon name="mdi:magnify" size="24" />
-        </button>
+        </NuxtLink>
         <div v-if="searchResults.length > 0"
             class="absolute top-10 left-0 w-full h-auto z-50 bg-[#fff] p-5 gap-5 flex flex-col border border-gray-300 rounded-md">
             <NuxtLink @click="searchResults = []" :to="`/products/${product.id}`" v-for="product in searchResults"
