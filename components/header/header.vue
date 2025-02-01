@@ -9,7 +9,9 @@
                     <Search />
                 </div>
             </div>
-            <button @click="handleShowCart" class="
+            <button 
+            @click="handleShowCart" 
+            class="
             flex 
             items-center 
             justify-center 
